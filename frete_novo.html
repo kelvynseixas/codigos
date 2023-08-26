@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora do frete</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        #resultado {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de Frete</h1>
+    <div class="container">
+        <label for="porkm">Valor por Km (R$)</label>
+        <input type="number" id="porkm" placeholder="Valor por Km">
+        
+        <label for="minimo">Taxa Mínimo (R$)</label>
+        <input type="number" id="minimo" placeholder="Valor mínimo">
+        
+        <label for="gratis">Distancia de Frete Grátis (em Km)</label>
+        <input type="number" id="gratis" placeholder="Valor grátis">
+        
+        <label for="fixo">Taxa Fixa (R$)</label>
+        <input type="number" id="fixo" placeholder="Taxa fixa">
+
+        <button id="calcular">Calcular</button>
+
+        <label for="distancia">Km para Teste (KM)</label>
+        <input type="number" id="distancia" placeholder="Km teste">
+        
+        <p>Resultado: <span id="resultadoSpan"></span></p>
+    </div>
+
+    <script>
+        document.getElementById("calcular").addEventListener("click", function () {
+            var porkm = parseFloat(document.getElementById("porkm").value);
+            var minimo = parseFloat(document.getElementById("minimo").value);
+            var gratis = parseFloat(document.getElementById("gratis").value);
+            var fixo = parseFloat(document.getElementById("fixo").value);
+            var distancia = parseFloat(document.getElementById("distancia").value);
+            var kmefixa = (distancia * porkm) + fixo;
+            
+            if (distancia <= gratis) {
+                document.getElementById("resultadoSpan").textContent = "Frete grátis";
+            } else {
+                var resultado = kmefixa < minimo ? minimo : kmefixa;
+                document.getElementById("resultadoSpan").textContent = "R$" + resultado.toFixed(2);
+            }
+        });
+    </script>
+</body>
+</html>
